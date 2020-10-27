@@ -9,18 +9,6 @@ const {
 } = require('graphql')
 const server = 'http://localhost:3000'
 
-const filmType = new GraphQLObjectType({
-    name: 'film',
-    fields: () => ({
-      id: { type: GraphQLInt },
-      title: { type: GraphQLString },
-      director: { type: GraphQLString },
-      year: { type: GraphQLInt },
-      genre :{ type: GraphQLString },
-      score :{ type: GraphQLInt },
-      filmRate:{ type:GraphQLString }
-    }),
-  })
 
   const AnimeType = new GraphQLObjectType({
     name: 'Anime',
@@ -59,6 +47,7 @@ const mutation = new GraphQLObjectType({
       resolve(parentValue, args) {
         return axios.post(`${server}/animes`, {
           title: args.title,
+          director:args.director,
           anime: args.anime,
           year: args.year,
         }).then(res => res.data)
